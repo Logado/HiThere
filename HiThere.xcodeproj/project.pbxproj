@@ -8,15 +8,19 @@
 
 /* Begin PBXBuildFile section */
 		D030BF2A1E7DCF5700D5F3BF /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D030BF291E7DCF5700D5F3BF /* LoginController.swift */; };
+		D06E530C1E7EBA44009140A2 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D06E530B1E7EBA44009140A2 /* GoogleService-Info.plist */; };
 		D078F8511E70B4B800D4D728 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D078F8501E70B4B800D4D728 /* AppDelegate.swift */; };
 		D078F8531E70B4B800D4D728 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D078F8521E70B4B800D4D728 /* ViewController.swift */; };
 		D078F8561E70B4B800D4D728 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D078F8541E70B4B800D4D728 /* Main.storyboard */; };
 		D078F8581E70B4B800D4D728 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D078F8571E70B4B800D4D728 /* Assets.xcassets */; };
 		D078F85B1E70B4B800D4D728 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D078F8591E70B4B800D4D728 /* LaunchScreen.storyboard */; };
+		FA62DD38EECF9B6A1DD9060A /* Pods_HiThere.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD7B416CE9BDE58D9AA40772 /* Pods_HiThere.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		89E50667BC01B696FE14E76C /* Pods-HiThere.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HiThere.debug.xcconfig"; path = "Pods/Target Support Files/Pods-HiThere/Pods-HiThere.debug.xcconfig"; sourceTree = "<group>"; };
 		D030BF291E7DCF5700D5F3BF /* LoginController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginController.swift; sourceTree = "<group>"; };
+		D06E530B1E7EBA44009140A2 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		D078F84D1E70B4B800D4D728 /* HiThere.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HiThere.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D078F8501E70B4B800D4D728 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D078F8521E70B4B800D4D728 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -24,6 +28,8 @@
 		D078F8571E70B4B800D4D728 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D078F85A1E70B4B800D4D728 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D078F85C1E70B4B800D4D728 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F95D4922D88B7480F46FB58A /* Pods-HiThere.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HiThere.release.xcconfig"; path = "Pods/Target Support Files/Pods-HiThere/Pods-HiThere.release.xcconfig"; sourceTree = "<group>"; };
+		FD7B416CE9BDE58D9AA40772 /* Pods_HiThere.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HiThere.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -31,12 +37,30 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FA62DD38EECF9B6A1DD9060A /* Pods_HiThere.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		9093C7DEA8FFCC257A965680 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				FD7B416CE9BDE58D9AA40772 /* Pods_HiThere.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		C63BF4C5221ADE8DC0192985 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				89E50667BC01B696FE14E76C /* Pods-HiThere.debug.xcconfig */,
+				F95D4922D88B7480F46FB58A /* Pods-HiThere.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		D030BF281E7DCED700D5F3BF /* Controller */ = {
 			isa = PBXGroup;
 			children = (
@@ -51,6 +75,8 @@
 			children = (
 				D078F84F1E70B4B800D4D728 /* HiThere */,
 				D078F84E1E70B4B800D4D728 /* Products */,
+				C63BF4C5221ADE8DC0192985 /* Pods */,
+				9093C7DEA8FFCC257A965680 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -71,6 +97,7 @@
 				D078F8571E70B4B800D4D728 /* Assets.xcassets */,
 				D078F8591E70B4B800D4D728 /* LaunchScreen.storyboard */,
 				D078F85C1E70B4B800D4D728 /* Info.plist */,
+				D06E530B1E7EBA44009140A2 /* GoogleService-Info.plist */,
 			);
 			path = HiThere;
 			sourceTree = "<group>";
@@ -82,9 +109,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = D078F85F1E70B4B800D4D728 /* Build configuration list for PBXNativeTarget "HiThere" */;
 			buildPhases = (
+				9382E17379558114B6793F0F /* [CP] Check Pods Manifest.lock */,
 				D078F8491E70B4B800D4D728 /* Sources */,
 				D078F84A1E70B4B800D4D728 /* Frameworks */,
 				D078F84B1E70B4B800D4D728 /* Resources */,
+				F4EEF94429EE68BD0C35BAB6 /* [CP] Embed Pods Frameworks */,
+				43397007B43F1189E6D68AE5 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -135,12 +165,61 @@
 			buildActionMask = 2147483647;
 			files = (
 				D078F85B1E70B4B800D4D728 /* LaunchScreen.storyboard in Resources */,
+				D06E530C1E7EBA44009140A2 /* GoogleService-Info.plist in Resources */,
 				D078F8581E70B4B800D4D728 /* Assets.xcassets in Resources */,
 				D078F8561E70B4B800D4D728 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		43397007B43F1189E6D68AE5 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-HiThere/Pods-HiThere-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		9382E17379558114B6793F0F /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		F4EEF94429EE68BD0C35BAB6 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-HiThere/Pods-HiThere-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		D078F8491E70B4B800D4D728 /* Sources */ = {
@@ -270,11 +349,12 @@
 		};
 		D078F8601E70B4B800D4D728 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 89E50667BC01B696FE14E76C /* Pods-HiThere.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = HiThere/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = Kir.HiThere;
+				PRODUCT_BUNDLE_IDENTIFIER = com.Kir.HiThere;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};
@@ -282,11 +362,12 @@
 		};
 		D078F8611E70B4B800D4D728 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = F95D4922D88B7480F46FB58A /* Pods-HiThere.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = HiThere/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = Kir.HiThere;
+				PRODUCT_BUNDLE_IDENTIFIER = com.Kir.HiThere;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};

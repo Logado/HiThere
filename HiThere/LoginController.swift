@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Firebase
 
 class LoginController: UIViewController {
     
@@ -69,8 +70,49 @@ class LoginController: UIViewController {
         button.translatesAutoresizingMaskIntoConstraints = false
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 16)
         button.layer.cornerRadius = 5
+        
+        button.addTarget(self, action: #selector(handleRegister), for: .touchUpInside)
+        
         return button
     }()
+    
+    // Функция Регистрации при нажатии кнопки регистрации
+    func handleRegister(){
+        //Проверка заполненности окон email и password
+        guard let email = emailTextField.text, let password = passwordTextField.text, let name = nameTextField.text else {
+            print("Form is not Valid")
+            return
+        }
+        // Аутентификация пользователя
+        FIRAuth.auth()?.createUser(withEmail: email, password: password, completion: { (user: FIRUser?, error) in
+            //Выводим ошибку
+            if error != nil{
+                print(error!)
+                return
+            }
+            //Проверка уникального ключа пользователя UID
+            guard (user?.uid) != nil else{
+                print("UID is not correct")
+                return
+            }
+            
+            //При успешной аутентификации добавляем Name и Email в БД
+            let values = ["name": name, "email": email]
+            let ref = FIRDatabase.database().reference(fromURL: "https://hi-there-a3dd4.firebaseio.com/")
+            let usersRef = ref.child("users").child((user?.uid)!)
+            usersRef.updateChildValues(values, withCompletionBlock: { (errorRef, ref) in
+                //Выводим ошибку
+                if errorRef != nil{
+                    print(errorRef!)
+                    return
+                }
+                print("Saved user successfully into db")
+            })
+            
+            
+            
+        })
+    }
 
 
     override func viewDidLoad() {
