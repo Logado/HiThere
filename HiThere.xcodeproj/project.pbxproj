@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D030BF2A1E7DCF5700D5F3BF /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D030BF291E7DCF5700D5F3BF /* LoginController.swift */; };
 		D078F8511E70B4B800D4D728 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D078F8501E70B4B800D4D728 /* AppDelegate.swift */; };
 		D078F8531E70B4B800D4D728 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D078F8521E70B4B800D4D728 /* ViewController.swift */; };
 		D078F8561E70B4B800D4D728 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D078F8541E70B4B800D4D728 /* Main.storyboard */; };
@@ -15,6 +16,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		D030BF291E7DCF5700D5F3BF /* LoginController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginController.swift; sourceTree = "<group>"; };
 		D078F84D1E70B4B800D4D728 /* HiThere.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HiThere.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D078F8501E70B4B800D4D728 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D078F8521E70B4B800D4D728 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -35,6 +37,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		D030BF281E7DCED700D5F3BF /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				D030BF291E7DCF5700D5F3BF /* LoginController.swift */,
+				D078F8521E70B4B800D4D728 /* ViewController.swift */,
+			);
+			name = Controller;
+			sourceTree = "<group>";
+		};
 		D078F8441E70B4B800D4D728 = {
 			isa = PBXGroup;
 			children = (
@@ -54,8 +65,8 @@
 		D078F84F1E70B4B800D4D728 /* HiThere */ = {
 			isa = PBXGroup;
 			children = (
+				D030BF281E7DCED700D5F3BF /* Controller */,
 				D078F8501E70B4B800D4D728 /* AppDelegate.swift */,
-				D078F8521E70B4B800D4D728 /* ViewController.swift */,
 				D078F8541E70B4B800D4D728 /* Main.storyboard */,
 				D078F8571E70B4B800D4D728 /* Assets.xcassets */,
 				D078F8591E70B4B800D4D728 /* LaunchScreen.storyboard */,
@@ -137,6 +148,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D078F8531E70B4B800D4D728 /* ViewController.swift in Sources */,
+				D030BF2A1E7DCF5700D5F3BF /* LoginController.swift in Sources */,
 				D078F8511E70B4B800D4D728 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -299,6 +311,7 @@
 				D078F8611E70B4B800D4D728 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
