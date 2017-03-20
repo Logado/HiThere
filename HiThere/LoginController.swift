@@ -75,6 +75,59 @@ class LoginController: UIViewController {
         
         return button
     }()
+    //Создание переключателя
+    let loginRegisterSegmentedControl: UISegmentedControl = {
+        let sc = UISegmentedControl(items: ["Login", "Register"])
+        sc.translatesAutoresizingMaskIntoConstraints = false
+        sc.tintColor = UIColor.white
+        sc.backgroundColor = UIColor(colorLiteralRed: 52/255, green: 171/255, blue: 224/255, alpha: 1)
+        sc.selectedSegmentIndex = 1
+        sc.addTarget(self, action: #selector(handleLoginRegisterChange), for: .valueChanged)
+        return sc
+    }()
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        // Задний фон View
+        view.backgroundColor = UIColor(colorLiteralRed: 52/255, green: 171/255, blue: 224/255, alpha: 1)
+        
+        //Отображение объектов на View
+        view.addSubview(loginRegisterSegmentedControl)
+        view.addSubview(inputsContainerView)
+        view.addSubview(loginRegisterButton)
+        setupLoginRegisterSegmentedControl()
+        setupInputsContainerView()
+        setupLoginRegisterButton()
+    }
+    
+    //Работаем с переключением с Register на Login
+    func handleLoginRegisterChange(){
+        
+        //Сохраняем Title по индексу
+        let title = loginRegisterSegmentedControl.titleForSegment(at: loginRegisterSegmentedControl.selectedSegmentIndex)
+        
+        //Присваиваем Title кнопке снизу
+        loginRegisterButton.setTitle(title, for: .normal)
+        
+        //Меняем высоту контейнера в зависимости от индекса переключателя
+        inputsContainerViewHeightAnchor?.constant = loginRegisterSegmentedControl.selectedSegmentIndex == 0 ? 100 : 150
+        // Убираем окно для ввода Name при Login и возвращам при регистрации
+        nameTextFieldHeightAnchor?.isActive = false
+        nameTextFieldHeightAnchor = nameTextField.heightAnchor.constraint(equalTo: inputsContainerView.heightAnchor, multiplier: loginRegisterSegmentedControl.selectedSegmentIndex == 0 ? 0 : 1/3)
+        nameTextField.isHidden = loginRegisterSegmentedControl.selectedSegmentIndex == 0
+        nameTextFieldHeightAnchor?.isActive = true
+        
+        //Увелчиваем окна для ввода Email и Password и возвращаем при регистрации
+        emailTextFieldHeightAnchor?.isActive = false
+        passwordTextFieldHeightAnchor?.isActive = false
+        emailTextFieldHeightAnchor = emailTextField.heightAnchor.constraint(equalTo: inputsContainerView.heightAnchor, multiplier: loginRegisterSegmentedControl.selectedSegmentIndex == 0 ? 1/2 : 1/3)
+        passwordTextFieldHeightAnchor = passwordTextField.heightAnchor.constraint(equalTo: inputsContainerView.heightAnchor, multiplier: loginRegisterSegmentedControl.selectedSegmentIndex == 0 ? 1/2 : 1/3)
+        emailTextFieldHeightAnchor?.isActive = true
+        passwordTextFieldHeightAnchor?.isActive = true
+        
+    }
+
     
     // Функция Регистрации при нажатии кнопки регистрации
     func handleRegister(){
@@ -107,34 +160,28 @@ class LoginController: UIViewController {
                     return
                 }
                 print("Saved user successfully into db")
+                //Закрываем View Login/Register при успешной регистрации
+                self.dismiss(animated: true, completion: nil)
             })
-            
-            
-            
         })
     }
-
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        // Задний фон View
-        view.backgroundColor = UIColor(colorLiteralRed: 52/255, green: 171/255, blue: 224/255, alpha: 1)
-        
-        //Отображение элементов на View
-        view.addSubview(inputsContainerView)
-        view.addSubview(loginRegisterButton)
-        setupInputsContainerView()
-        setuploginRegisterButton()
+    
+    //Настройка переключателя Login/Register
+    func setupLoginRegisterSegmentedControl(){
+        loginRegisterSegmentedControl.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        loginRegisterSegmentedControl.topAnchor.constraint(equalTo: view.topAnchor, constant: 80).isActive = true
+        loginRegisterSegmentedControl.widthAnchor.constraint(equalTo: view.widthAnchor, constant: -40).isActive = true
+        loginRegisterSegmentedControl.heightAnchor.constraint(equalToConstant: 30).isActive = true
     }
     
-
     //Настройка контейнера под окна для ввода
+    var inputsContainerViewHeightAnchor: NSLayoutConstraint?
     func setupInputsContainerView(){
         inputsContainerView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        inputsContainerView.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: -130).isActive = true
+        inputsContainerView.topAnchor.constraint(equalTo: loginRegisterSegmentedControl.bottomAnchor, constant: 12).isActive = true
         inputsContainerView.widthAnchor.constraint(equalTo: view.widthAnchor, constant: 0).isActive = true
-        inputsContainerView.heightAnchor.constraint(equalToConstant: 150).isActive = true
+        inputsContainerViewHeightAnchor = inputsContainerView.heightAnchor.constraint(equalToConstant: 150)
+         inputsContainerViewHeightAnchor?.isActive = true
         
         //Отображение окна для ввода Name
         inputsContainerView.addSubview(nameTextField)
@@ -150,19 +197,21 @@ class LoginController: UIViewController {
     }
     
     //Настройка кнопки регистрации
-    func setuploginRegisterButton(){
+    func setupLoginRegisterButton(){
         loginRegisterButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         loginRegisterButton.topAnchor.constraint(equalTo: inputsContainerView.bottomAnchor, constant: 12).isActive = true
         loginRegisterButton.widthAnchor.constraint(equalTo: view.widthAnchor, constant: -24).isActive = true
         loginRegisterButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
     }
     
+    var nameTextFieldHeightAnchor: NSLayoutConstraint?
     //Настройка окна ввода Name
     func setupNameTextField(){
         nameTextField.leftAnchor.constraint(equalTo: inputsContainerView.leftAnchor, constant: 12).isActive = true
         nameTextField.topAnchor.constraint(equalTo: inputsContainerView.topAnchor).isActive = true
         nameTextField.widthAnchor.constraint(equalTo: inputsContainerView.widthAnchor).isActive = true
-        nameTextField.heightAnchor.constraint(equalTo: inputsContainerView.heightAnchor, multiplier: 1/3).isActive = true
+        nameTextFieldHeightAnchor = nameTextField.heightAnchor.constraint(equalTo: inputsContainerView.heightAnchor, multiplier: 1/3)
+        nameTextFieldHeightAnchor?.isActive = true
     }
     
     //Настройка разделителя внизу окна Name
@@ -173,13 +222,14 @@ class LoginController: UIViewController {
         nameSeparatorView.heightAnchor.constraint(equalToConstant: 0.5).isActive = true
         
     }
-    
+    var emailTextFieldHeightAnchor: NSLayoutConstraint?
     //Настройка окна ввода Email
     func setupEmailTextField(){
         emailTextField.leftAnchor.constraint(equalTo: inputsContainerView.leftAnchor, constant: 12).isActive = true
         emailTextField.topAnchor.constraint(equalTo: nameTextField.bottomAnchor).isActive = true
         emailTextField.widthAnchor.constraint(equalTo: inputsContainerView.widthAnchor).isActive = true
-        emailTextField.heightAnchor.constraint(equalTo: inputsContainerView.heightAnchor, multiplier: 1/3).isActive = true
+        emailTextFieldHeightAnchor = emailTextField.heightAnchor.constraint(equalTo: inputsContainerView.heightAnchor, multiplier: 1/3)
+        emailTextFieldHeightAnchor?.isActive = true
     }
     
     //Настройка разделителя внизу окна Email
@@ -191,12 +241,14 @@ class LoginController: UIViewController {
         
     }
     
+    var passwordTextFieldHeightAnchor: NSLayoutConstraint?
     //Настройка окна ввода Password
     func setupPasswordTextField(){
         passwordTextField.leftAnchor.constraint(equalTo: inputsContainerView.leftAnchor, constant: 12).isActive = true
         passwordTextField.topAnchor.constraint(equalTo: emailTextField.bottomAnchor).isActive = true
         passwordTextField.widthAnchor.constraint(equalTo: inputsContainerView.widthAnchor).isActive = true
-        passwordTextField.heightAnchor.constraint(equalTo: inputsContainerView.heightAnchor, multiplier: 1/3).isActive = true
+        passwordTextFieldHeightAnchor = passwordTextField.heightAnchor.constraint(equalTo: inputsContainerView.heightAnchor, multiplier: 1/3)
+        passwordTextFieldHeightAnchor?.isActive = true
     }
 
     
