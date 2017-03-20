@@ -14,29 +14,35 @@ class ViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // Создание Navigation Bar и фрейма, в котором разместим Label "Chats"
+        // Создание Navigation Bar и создание Title "Chats"
         if let navigationBar = self.navigationController?.navigationBar{
-            let labelFrame = CGRect(x: 0, y: 0, width: navigationBar.frame.width, height: navigationBar.frame.height)
-            
-            //Создание Label "Chats" и настройка его параметров
-            let chatsLabel = UILabel(frame: labelFrame)
-            chatsLabel.text = "Chats"
-            chatsLabel.textAlignment = .center
-            
-            //Отображение Label на View
-            navigationBar.addSubview(chatsLabel)
+            navigationBar.topItem?.title = "Chats"
         }
         
-       // Создание кнопки "Edit" в Navigation Bar
+        // Создание кнопки "Edit" в Navigation Bar
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Log Out", style: .plain, target: self, action: #selector(handleLogout))
+        
+        // Если пользователь не авторизован
+        if FIRAuth.auth()?.currentUser?.uid == nil{
+            //Включаем View Login/Register сразу же после его загрузки
+            perform(#selector(handleLogout), with: nil, afterDelay: 0)
         }
-
-        func handleLogout(){
-            let loginController = LoginController()
-            present(loginController, animated: true, completion: nil)
+        
     }
     
+    //Функция перехода из View Chats в View Login/Register
+    func handleLogout(){
+        //Поиск ошибки
+        do{
+            try FIRAuth.auth()?.signOut()
+        } catch let logoutError{
+            print(logoutError)
+        }
+        //Выход
+        let loginController = LoginController()
+        present(loginController, animated: true, completion: nil)
+    }
     
-
 }
+
 

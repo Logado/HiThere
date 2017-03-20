@@ -11,6 +11,12 @@ import Firebase
 
 class LoginController: UIViewController {
     
+    //Переменные для изменения высоты объектов при переключении Login/Register
+    var inputsContainerViewHeightAnchor: NSLayoutConstraint?
+    var nameTextFieldHeightAnchor: NSLayoutConstraint?
+    var emailTextFieldHeightAnchor: NSLayoutConstraint?
+    var passwordTextFieldHeightAnchor: NSLayoutConstraint?
+    
     // Создание контейнера под окна для ввода
     let inputsContainerView: UIView = {
         let view = UIView()
@@ -71,7 +77,7 @@ class LoginController: UIViewController {
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 16)
         button.layer.cornerRadius = 5
         
-        button.addTarget(self, action: #selector(handleRegister), for: .touchUpInside)
+        button.addTarget(self, action: #selector(handleLoginRegister), for: .touchUpInside)
         
         return button
     }()
@@ -112,6 +118,7 @@ class LoginController: UIViewController {
         
         //Меняем высоту контейнера в зависимости от индекса переключателя
         inputsContainerViewHeightAnchor?.constant = loginRegisterSegmentedControl.selectedSegmentIndex == 0 ? 100 : 150
+        
         // Убираем окно для ввода Name при Login и возвращам при регистрации
         nameTextFieldHeightAnchor?.isActive = false
         nameTextFieldHeightAnchor = nameTextField.heightAnchor.constraint(equalTo: inputsContainerView.heightAnchor, multiplier: loginRegisterSegmentedControl.selectedSegmentIndex == 0 ? 0 : 1/3)
@@ -128,16 +135,27 @@ class LoginController: UIViewController {
         
     }
 
+    //Выбираем функцию в зависимости от индекса переключателя. Login - 0, Register - 1
+    func handleLoginRegister(){
+        if loginRegisterSegmentedControl.selectedSegmentIndex == 0{
+            handleLogin()
+        } else {
+            handleRegister()
+        }
+    }
     
-    // Функция Регистрации при нажатии кнопки регистрации
+    // Функция Register
     func handleRegister(){
+        
         //Проверка заполненности окон email и password
         guard let email = emailTextField.text, let password = passwordTextField.text, let name = nameTextField.text else {
             print("Form is not Valid")
             return
         }
+        
         // Аутентификация пользователя
         FIRAuth.auth()?.createUser(withEmail: email, password: password, completion: { (user: FIRUser?, error) in
+            
             //Выводим ошибку
             if error != nil{
                 print(error!)
@@ -154,15 +172,36 @@ class LoginController: UIViewController {
             let ref = FIRDatabase.database().reference(fromURL: "https://hi-there-a3dd4.firebaseio.com/")
             let usersRef = ref.child("users").child((user?.uid)!)
             usersRef.updateChildValues(values, withCompletionBlock: { (errorRef, ref) in
+                
                 //Выводим ошибку
                 if errorRef != nil{
                     print(errorRef!)
                     return
                 }
                 print("Saved user successfully into db")
+                
                 //Закрываем View Login/Register при успешной регистрации
                 self.dismiss(animated: true, completion: nil)
             })
+        })
+    }
+    
+    //Функция Login
+    func handleLogin(){
+       
+        //Проверяем заполненность окно
+        guard let email = emailTextField.text, let password = passwordTextField.text else {
+            print("Form is not Valid")
+            return
+        }
+        //Запускаем пользователя
+        FIRAuth.auth()?.signIn(withEmail: email, password: password, completion: { (user, errorSignIn) in
+            if errorSignIn != nil{
+                print(errorSignIn!)
+                return
+            }
+            //Закрываем View Login/Register
+            self.dismiss(animated: true, completion: nil)
         })
     }
     
@@ -175,7 +214,7 @@ class LoginController: UIViewController {
     }
     
     //Настройка контейнера под окна для ввода
-    var inputsContainerViewHeightAnchor: NSLayoutConstraint?
+ 
     func setupInputsContainerView(){
         inputsContainerView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         inputsContainerView.topAnchor.constraint(equalTo: loginRegisterSegmentedControl.bottomAnchor, constant: 12).isActive = true
@@ -183,7 +222,7 @@ class LoginController: UIViewController {
         inputsContainerViewHeightAnchor = inputsContainerView.heightAnchor.constraint(equalToConstant: 150)
          inputsContainerViewHeightAnchor?.isActive = true
         
-        //Отображение окна для ввода Name
+        //Отображение окон для ввода и настройка их положения и размеров
         inputsContainerView.addSubview(nameTextField)
         inputsContainerView.addSubview(nameSeparatorView)
         inputsContainerView.addSubview(emailTextField)
@@ -204,7 +243,7 @@ class LoginController: UIViewController {
         loginRegisterButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
     }
     
-    var nameTextFieldHeightAnchor: NSLayoutConstraint?
+
     //Настройка окна ввода Name
     func setupNameTextField(){
         nameTextField.leftAnchor.constraint(equalTo: inputsContainerView.leftAnchor, constant: 12).isActive = true
@@ -222,7 +261,7 @@ class LoginController: UIViewController {
         nameSeparatorView.heightAnchor.constraint(equalToConstant: 0.5).isActive = true
         
     }
-    var emailTextFieldHeightAnchor: NSLayoutConstraint?
+    
     //Настройка окна ввода Email
     func setupEmailTextField(){
         emailTextField.leftAnchor.constraint(equalTo: inputsContainerView.leftAnchor, constant: 12).isActive = true
@@ -241,7 +280,6 @@ class LoginController: UIViewController {
         
     }
     
-    var passwordTextFieldHeightAnchor: NSLayoutConstraint?
     //Настройка окна ввода Password
     func setupPasswordTextField(){
         passwordTextField.leftAnchor.constraint(equalTo: inputsContainerView.leftAnchor, constant: 12).isActive = true
@@ -251,13 +289,9 @@ class LoginController: UIViewController {
         passwordTextFieldHeightAnchor?.isActive = true
     }
 
-    
     // Изменение цвета контента Status Bar(оператор, часы, батарея)
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
     }
-    
-
-    
 }
 
