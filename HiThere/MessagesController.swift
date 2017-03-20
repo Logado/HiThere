@@ -9,7 +9,7 @@
 import UIKit
 import Firebase
 
-class ViewController: UITableViewController {
+class MessagesController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,12 +22,32 @@ class ViewController: UITableViewController {
         // Создание кнопки "Edit" в Navigation Bar
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Log Out", style: .plain, target: self, action: #selector(handleLogout))
         
-        // Если пользователь не авторизован
+        //Создание иконки New Message и переход в NewMessageView
+        let imageNewMessage = UIImage(named: "new_message_icon")
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: imageNewMessage, style: .plain, target: self, action: #selector(handleNewMessage))
+        
+        checkIfUserIsLoggedIn()
+    }
+    
+    //
+    func handleNewMessage(){
+        let newMessageController = NewMessageController()
+        let navController = UINavigationController(rootViewController: newMessageController)
+        present(navController, animated: true, completion: nil)
+    }
+    
+    //Функция проверки авторизованного пользователя
+    func checkIfUserIsLoggedIn(){
         if FIRAuth.auth()?.currentUser?.uid == nil{
             //Включаем View Login/Register сразу же после его загрузки
             perform(#selector(handleLogout), with: nil, afterDelay: 0)
+        } else{
+            let uid = FIRAuth.auth()?.currentUser?.uid
+            FIRDatabase.database().reference().child("users").child(uid!).observe(.value, with: { (snapshot) in
+                print(snapshot)
+                
+            }, withCancel: nil)
         }
-        
     }
     
     //Функция перехода из View Chats в View Login/Register
