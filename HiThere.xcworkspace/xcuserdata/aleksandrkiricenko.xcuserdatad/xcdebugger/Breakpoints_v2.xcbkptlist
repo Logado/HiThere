@@ -42,11 +42,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "HiThere/NewMessageController.swift"
-            timestampString = "511713371.248972"
+            timestampString = "511745184.52206"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "41"
-            endingLineNumber = "41"
+            startingLineNumber = "40"
+            endingLineNumber = "40"
             landmarkName = "fetchUser()"
             landmarkType = "7">
          </BreakpointContent>

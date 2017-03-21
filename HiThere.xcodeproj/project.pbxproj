@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D017E7221E808DF500B4B71A /* ChatLogController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D017E7211E808DF500B4B71A /* ChatLogController.swift */; };
+		D017E7241E80BFDA00B4B71A /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = D017E7231E80BFDA00B4B71A /* Message.swift */; };
 		D030BF2A1E7DCF5700D5F3BF /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D030BF291E7DCF5700D5F3BF /* LoginController.swift */; };
 		D03892B91E7FF8F000839478 /* NewMessageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03892B81E7FF8F000839478 /* NewMessageController.swift */; };
 		D03892BC1E8009F600839478 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03892BB1E8009F600839478 /* User.swift */; };
@@ -21,6 +23,8 @@
 
 /* Begin PBXFileReference section */
 		89E50667BC01B696FE14E76C /* Pods-HiThere.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HiThere.debug.xcconfig"; path = "Pods/Target Support Files/Pods-HiThere/Pods-HiThere.debug.xcconfig"; sourceTree = "<group>"; };
+		D017E7211E808DF500B4B71A /* ChatLogController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatLogController.swift; sourceTree = "<group>"; };
+		D017E7231E80BFDA00B4B71A /* Message.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 		D030BF291E7DCF5700D5F3BF /* LoginController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginController.swift; sourceTree = "<group>"; };
 		D03892B81E7FF8F000839478 /* NewMessageController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewMessageController.swift; sourceTree = "<group>"; };
 		D03892BB1E8009F600839478 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
@@ -71,6 +75,7 @@
 				D030BF291E7DCF5700D5F3BF /* LoginController.swift */,
 				D078F8521E70B4B800D4D728 /* MessagesController.swift */,
 				D03892B81E7FF8F000839478 /* NewMessageController.swift */,
+				D017E7211E808DF500B4B71A /* ChatLogController.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -79,6 +84,7 @@
 			isa = PBXGroup;
 			children = (
 				D03892BB1E8009F600839478 /* User.swift */,
+				D017E7231E80BFDA00B4B71A /* Message.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -240,11 +246,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D017E7221E808DF500B4B71A /* ChatLogController.swift in Sources */,
 				D03892B91E7FF8F000839478 /* NewMessageController.swift in Sources */,
 				D078F8531E70B4B800D4D728 /* MessagesController.swift in Sources */,
 				D030BF2A1E7DCF5700D5F3BF /* LoginController.swift in Sources */,
 				D03892BC1E8009F600839478 /* User.swift in Sources */,
 				D078F8511E70B4B800D4D728 /* AppDelegate.swift in Sources */,
+				D017E7241E80BFDA00B4B71A /* Message.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

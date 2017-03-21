@@ -11,6 +11,8 @@ import Firebase
 
 class MessagesController: UITableViewController {
 
+    var messages = [Message]()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -27,11 +29,44 @@ class MessagesController: UITableViewController {
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: imageNewMessage, style: .plain, target: self, action: #selector(handleNewMessage))
         
         checkIfUserIsLoggedIn()
+        observeMessages()
+    }
+    //Загружаем сообщения в View Chats
+    func observeMessages(){
+       let ref = FIRDatabase.database().reference().child("messages")
+        ref.observe(.childAdded, with: { (snapshot) in
+            if let dictionary = snapshot.value as? [String: AnyObject]{
+                let message = Message()
+                message.setValuesForKeys(dictionary)
+                self.messages.append(message)
+                self.tableView.reloadData()
+            }
+        }, withCancel: nil)
+    }
+    //Количество строк 
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return messages.count
     }
     
-    //
+    //Настраиваем ячейки таблицы
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = UITableViewCell(style: .subtitle, reuseIdentifier: "defaultCell")
+        cell.textLabel?.text = messages[indexPath.row].text
+        return cell
+    }
+    
+    //Переход при нажатии на кнопку на View Chat
+    func showChatControllerForUser(user: User){
+        let chatLogController = ChatLogController(collectionViewLayout: UICollectionViewFlowLayout())
+        chatLogController.user = user
+        navigationController?.pushViewController(chatLogController, animated: true)
+    }
+    
+    //Переход при нажатии на кнопку на View NewMessage
     func handleNewMessage(){
         let newMessageController = NewMessageController()
+        //???
+        newMessageController.messagesController = self
         let navController = UINavigationController(rootViewController: newMessageController)
         present(navController, animated: true, completion: nil)
     }

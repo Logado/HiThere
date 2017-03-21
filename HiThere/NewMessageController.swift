@@ -32,12 +32,11 @@ class NewMessageController: UITableViewController {
     //Функция добавления пользователей в таблицу
     func fetchUser(){
         FIRDatabase.database().reference().child("users").observe(.childAdded, with: { (snapshot) in
-            
             //Создаем словарь с типом данных [String: AnyObject] ???
             if let dictionary = snapshot.value as? [String: AnyObject]{
                 let user = User()
                 user.setValuesForKeys(dictionary)
-                
+                user.id = snapshot.key
                 //Добавляем User в массив
                 self.users.append(user)
                
@@ -55,6 +54,16 @@ class NewMessageController: UITableViewController {
     //Количество строк для вывода
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return users.count
+    }
+    
+    
+    //Выход из View New Message на главный View и переход в View Chat
+    var messagesController = MessagesController()
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        dismiss(animated: true){
+        let user = self.users[indexPath.row]
+        self.messagesController.showChatControllerForUser(user: user)
+        }
     }
     
     //Выводим пользователей в таблицу
